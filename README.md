@@ -24,6 +24,7 @@ yarn install
 ```
 yarn run serve
 ```
+本地服务运行在localhost:3000，通过`vue-cli-service serve --port 3000`指定。
 
 ### 编译打包到生产环境
 ```
