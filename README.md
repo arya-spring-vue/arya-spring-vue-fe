@@ -7,8 +7,10 @@
 ------------ | -------------
 脚手架 | vue-cli3.0
 UI框架 | iview
-HTTP库 | axios
 项目语言 | typescript，sass
+HTTP库 | axios
+状态管理 | vuex
+路由管理 | vue-router
 lint工具 | eslint，prettier
 单测库 | mocha，chai
 
