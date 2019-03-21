@@ -6,13 +6,13 @@
  步骤| 技术
 ------------ | -------------
 脚手架 | vue-cli3.0
-UI框架 | iview
-项目语言 | typescript，sass
+UI框架 | vue2.0, iView3.0
+项目语言 | typescript3.0, sass
 HTTP库 | axios
 状态管理 | vuex
 路由管理 | vue-router
-lint工具 | eslint，prettier
-单测库 | mocha，chai
+lint工具 | eslint, prettier
+单测库 | mocha, chai
 
 
 ## 项目安装
