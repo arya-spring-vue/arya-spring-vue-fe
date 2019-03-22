@@ -1,11 +1,6 @@
 <template>
   <div>
-    <ul v-for="{ age, email, name, sex, id } in users" :key="id">
-      <li>{{ name }}</li>
-      <li>{{ sex }}</li>
-      <li>{{ age }}</li>
-      <li>{{ email }}</li>
-    </ul>
+    <Table :columns="columns" :data="users"></Table>
   </div>
 </template>
 
@@ -15,7 +10,25 @@ export default {
   name: "User",
   data() {
     return {
-      users: []
+      users: [],
+      columns: [
+        {
+          title: "姓名",
+          key: "name"
+        },
+        {
+          title: "性别",
+          key: "sex"
+        },
+        {
+          title: "年龄",
+          key: "age"
+        },
+        {
+          title: "电子邮件",
+          key: "email"
+        }
+      ]
     };
   },
   mounted() {
