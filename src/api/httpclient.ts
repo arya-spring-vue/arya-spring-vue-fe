@@ -6,9 +6,13 @@ interface methodInterface {
     dataType: string,
 }
 
+interface reqDataInterface{
+    id: number,
+}
+
 interface urlInterface {
     url: string,
-    reqData: object,
+    reqData: reqDataInterface
 }
 
 const responseHandler = (response: any)=> {
