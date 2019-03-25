@@ -33,6 +33,13 @@ export default {
   },
   mounted() {
     this.readUsers();
+    this.updateUser({
+      id: 1,
+      name: "kai",
+      sex: "man",
+      age: 24,
+      email: "kk@gmail.com"
+    });
   },
   methods: {
     readUsers() {
@@ -40,6 +47,18 @@ export default {
         .readUsers()
         .then(data => {
           this.users = data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    updateUser(req) {
+      console.log(req);
+      userApi
+        .updateUser(req)
+        .then(data => {
+          // this.users = data;
+          this.$Message.success(data);
         })
         .catch(err => {
           console.log(err);

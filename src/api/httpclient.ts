@@ -44,11 +44,17 @@ const redirect = (url: string) => {
 };
 
 const generateRequest = ({method, dataType}: methodInterface) => ( {url, reqData}: urlInterface ) => {
+    let restUrl;
+    if(method==='put'){
+        restUrl = `${masterConfig.ARYA_SPRING_VUE_BE}${url}/${reqData.id}`;
+    }else{
+        restUrl = `${masterConfig.ARYA_SPRING_VUE_BE}${url}`;
+    }
     const options = {
         method,
-        url: `${masterConfig.ARYA_SPRING_VUE_BE}${url}`,
-        withCredentials: true,
+        url: restUrl,
         [dataType]: reqData,
+        withCredentials: true,
     };
     return new Promise((resolve, reject) => {
         axios.request(options).then((response)=>{
@@ -72,6 +78,7 @@ export default {
         return {
             post: generateRequest({method:'post', dataType:'data'}),
             get: generateRequest({method:'get', dataType: 'params'}),
+            put: generateRequest({method:'put', dataType:'data'}),
         }
     }
 }
