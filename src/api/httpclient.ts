@@ -7,7 +7,7 @@ interface methodInterface {
 }
 
 interface reqDataInterface{
-    id: number,
+    id?: number,
 }
 
 interface urlInterface {
