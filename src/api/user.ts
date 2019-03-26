@@ -11,5 +11,8 @@ export default {
     },
     updateUser(reqData: object){
         return client.put({url:'/spring/vue/updateUser', reqData })
-    }
+    },
+    deleteUser(reqData: object){
+      return client.delete({url:'/spring/vue/deleteUser', reqData})
+    },
 }

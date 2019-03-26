@@ -40,6 +40,9 @@ export default {
       age: 24,
       email: "kk@gmail.com"
     });
+    this.deleteUser({
+      id: 2
+    });
   },
   methods: {
     readUsers() {
@@ -49,7 +52,7 @@ export default {
           this.users = data;
         })
         .catch(err => {
-          console.log(err);
+          this.$Message.error(err.message);
         });
     },
     updateUser(req) {
@@ -57,11 +60,21 @@ export default {
       userApi
         .updateUser(req)
         .then(data => {
-          // this.users = data;
           this.$Message.success(data);
         })
         .catch(err => {
-          console.log(err);
+          this.$Message.error(err.message);
+        });
+    },
+    deleteUser(req) {
+      console.log(req);
+      userApi
+        .deleteUser(req)
+        .then(data => {
+          this.$Message.success(data);
+        })
+        .catch(err => {
+          this.$Message.error(err.message);
         });
     }
   }

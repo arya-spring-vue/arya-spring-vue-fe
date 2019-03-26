@@ -24,6 +24,7 @@ const responseHandler = (response: any)=> {
             data,
         };
     } else {
+        // 目前这里的代码实际上是无用的
         const err = new Error('服务请求错误');
         switch(status) {
             case 400: err.message = '请求错误(400)';break;
@@ -49,7 +50,7 @@ const redirect = (url: string) => {
 
 const generateRequest = ({method, dataType}: methodInterface) => ( {url, reqData}: urlInterface ) => {
     let restUrl;
-    if(method==='put'){
+    if(method==='put' || method==="delete"){
         restUrl = `${masterConfig.ARYA_SPRING_VUE_BE}${url}/${reqData.id}`;
     }else{
         restUrl = `${masterConfig.ARYA_SPRING_VUE_BE}${url}`;
@@ -66,6 +67,7 @@ const generateRequest = ({method, dataType}: methodInterface) => ( {url, reqData
             if(status===200){
                 resolve(data);
             }
+            // 目前这里的代码实际上是无用的
             if(err&&status===401){
                 setTimeout(()=>{
                     redirect('/home')
@@ -73,6 +75,8 @@ const generateRequest = ({method, dataType}: methodInterface) => ( {url, reqData
             }else{
                 reject(err);
             }
+        }).catch((err)=>{
+            reject(err);
         })
     })
 };
@@ -83,6 +87,7 @@ export default {
             post: generateRequest({method:'post', dataType:'data'}),
             get: generateRequest({method:'get', dataType: 'params'}),
             put: generateRequest({method:'put', dataType:'data'}),
+            delete: generateRequest({method:'delete', dataType:'data'}),
         }
     }
 }
