@@ -1,3 +1,5 @@
+![](https://github.com/arya-spring-vue/arya-spring-vue-fe/blob/master/screenshot/arya-spring-vue-fe.png)
+
 # arya-spring-vue-fe
 这是一个半吊子前端创建的后台管理系统
 
