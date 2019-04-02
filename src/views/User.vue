@@ -32,6 +32,12 @@ export default {
     };
   },
   mounted() {
+    this.createUser({
+      name: "kai",
+      sex: "man",
+      age: 24,
+      email: "kk@gmail.com"
+    });
     this.readUsers();
     this.updateUser({
       id: 1,
@@ -45,6 +51,16 @@ export default {
     });
   },
   methods: {
+    createUser(obj) {
+      userApi
+        .createUser(obj)
+        .then(data => {
+          this.users = data;
+        })
+        .catch(err => {
+          this.$Message.error(err.message);
+        });
+    },
     readUsers() {
       userApi
         .readUsers()
