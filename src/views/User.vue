@@ -197,14 +197,18 @@ export default {
       this.updateUser({ id, name, sex, age, email });
     },
     userEditCancel() {
-      this.user = generateUser();
+      setTimeout(() => {
+        this.user = generateUser();
+      }, 1000);
       this.action.edit = false;
     },
     userDeleteConfirm() {
       this.deleteUser({ id: this.user.id });
     },
     userDeleteCancel() {
-      this.user = generateUser();
+      setTimeout(() => {
+        this.user = generateUser();
+      }, 1000);
       this.action.delete = false;
     }
   }
