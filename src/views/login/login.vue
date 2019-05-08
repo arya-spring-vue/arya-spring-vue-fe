@@ -46,6 +46,7 @@
           </FormItem>
           <FormItem prop="auth" style="margin-bottom:0">
             <a style="float: left">微信登录</a>
+            <a style="float: right">注册账号</a>
           </FormItem>
           <FormItem>
             <Button type="primary" style="width: 100%">登录</Button>
