@@ -57,6 +57,7 @@
 const generateUser = () => ({ id: 0, name: "", age: 0, email: "" });
 
 import userApi from "@/api/user";
+import studentApi from "@/api/student";
 export default {
   name: "User",
   data() {
@@ -141,16 +142,32 @@ export default {
       email: "kk@gmail.com"
     });
     this.readUsers();
-    this.deleteUser({
-      id: 2
-    });
+    // this.deleteUser({
+    //   id: 2
+    // });
+    studentApi
+      .createStudent({})
+      .then(data => {
+        this.$Message.success(data);
+      })
+      .catch(err => {
+        this.$Message.error(err.message);
+      });
+    studentApi
+      .readStudents()
+      .then(data => {
+        this.$Message.success(data);
+      })
+      .catch(err => {
+        this.$Message.error(err.message);
+      });
   },
   methods: {
     createUser(obj) {
       userApi
         .createUser(obj)
         .then(data => {
-          this.users = data;
+          this.$Message.success(data);
         })
         .catch(err => {
           this.$Message.error(err.message);
