@@ -16,16 +16,16 @@
           :rules="loginForm.rules"
           width="300"
         >
-          <FormItem prop="user">
+          <FormItem prop="account" class="form_item">
             <Input
               type="text"
-              v-model="loginForm.info.user"
+              v-model="loginForm.info.account"
               placeholder="用户名"
             >
               <Icon type="ios-person-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
-          <FormItem prop="password">
+          <FormItem prop="password" v-if="loginForm.type === 'PASSWORD'">
             <Input
               type="password"
               v-model="loginForm.info.password"
@@ -34,22 +34,37 @@
               <Icon type="ios-lock-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
-          <FormItem prop="auth" style="margin-bottom:0">
+          <!--<FormItem prop="CAPTCHA" v-if="loginForm.type === 'CAPTCHA'">-->
+          <FormItem prop="CAPTCHA" v-show="loginForm.type === 'CAPTCHA'">
             <Input
               type="password"
-              v-model="loginForm.info.auth"
+              v-model="loginForm.info.CAPTCHA"
               placeholder="验证码"
             >
               <Icon type="ios-phone-portrait" slot="prepend" />
-              <a slot="append">获取验证码</a>
+              <a slot="append" @click="CAPTCHAGetter">获取验证码</a>
             </Input>
           </FormItem>
-          <FormItem prop="auth" style="margin-bottom:0">
-            <a style="float: left">微信登录</a>
-            <a style="float: right">注册账号</a>
+          <FormItem prop="CAPTCHA" style="margin-bottom:0">
+            <a style="float: left" @click="weChatLoginTrigger">微信登录</a>
+            <a
+              v-if="loginForm.type === 'CAPTCHA'"
+              style="float: left;margin-left:2px;"
+              @click="loginForm.type = 'PASSWORD'"
+              >密码登录</a
+            >
+            <a
+              v-if="loginForm.type === 'PASSWORD'"
+              style="float: left;margin-left:2px;"
+              @click="loginForm.type = 'CAPTCHA'"
+              >验证码登录</a
+            >
+            <a style="float: right" @click="accountRegister">注册账号</a>
           </FormItem>
           <FormItem>
-            <Button type="primary" style="width: 100%">登录</Button>
+            <Button type="primary" style="width: 100%" @click="loginGuard"
+              >登录</Button
+            >
           </FormItem>
         </Form>
       </main>
@@ -81,13 +96,16 @@ export default {
       },
       footer: { projectUrl },
       loginForm: {
+        type: "PASSWORD", // 密码登录:'PASSWORD', 微信登录: 'WECHAT', 验证码:'CAPTCHA'
         info: {
-          user: "",
+          account: "",
           password: "",
-          auth: ""
+          CAPTCHA: ""
         },
         rules: {
-          user: [{ required: true, message: "请输入用户名", trigger: "blur" }],
+          account: [
+            { required: true, message: "请输入用户名", trigger: "blur" }
+          ],
           password: [
             { required: true, message: "请输入密码", trigger: "blur" },
             {
@@ -100,6 +118,21 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    weChatLoginTrigger() {
+      // 调用微信OAUTH登录SDK
+    },
+    CAPTCHAGetter(phoneNumber) {
+      // 通过手机号获取验证码 服务端需要存一份
+    },
+    accountRegister() {
+      // 注册账号，需要在用户表中增加唯一id，手机号以及密码
+    },
+    loginGuard() {
+      // 通过密码，验证码登录需要调用此方法；微信登录会自动登录
+      // 登录以后服务端生成一定有效期的cookie，前端存储后若登录失效返回401重定向到登录页，之后的每个请求都直接从服务端直接带cookie，不用前端带
+    }
   }
 };
 </script>
@@ -134,10 +167,12 @@ export default {
     }
     main {
       flex: 500px;
-      background: rgba(0, 11, 2, 1);
       display: flex;
       align-items: center;
       justify-content: center;
+      .form_item {
+        width: 300px;
+      }
     }
     footer {
       flex: 80px;
