@@ -6,5 +6,5 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias.set("@screenshot", resolve("screenshot"));
   },
-  publicPath: "/arya-spring-vue-fe"
+  // publicPath: "/arya-spring-vue-fe"
 };
